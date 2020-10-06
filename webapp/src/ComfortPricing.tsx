@@ -115,8 +115,8 @@ class ComfortPricing extends Component<any, ComfortPricingState> {
                 this.setState({
                     error: {
                         isActive: true,
-                        header: "Fetching exchange rate failed",
-                        message: `Got the following error trying to execute ${this.service.containerName}: ${err}`,
+                        header: "Fetching comfort pricing failed",
+                        message: `Got the following error trying to execute ${this.service.containerName}: ${err}. Check console for further information.`,
                     },
                 });
             });
@@ -138,10 +138,9 @@ class ComfortPricing extends Component<any, ComfortPricingState> {
         const firedRules = kieResultsArray[0].value;
 
         const comfortFee = kieResultsArray[1].value
-            .filter((kieObject: any) => {
-                return kieObject["com.ad364.authoring_lab.ComfortFee"];
-            })
+            .filter((kieObject: any) => kieObject["com.ad364.authoring_lab.ComfortFee"])
             .map((kieObject: any) => kieObject["com.ad364.authoring_lab.ComfortFee"]);
+            
         this.setState({
             comfortFee: comfortFee[0],
             firedRules,
@@ -186,7 +185,7 @@ class ComfortPricing extends Component<any, ComfortPricingState> {
                 <Form onSubmit={this.submit}>
                     <Flex>
                         <FlexItem>
-                            <FormGroup isInline={true} label="Loyalty Level" fieldId="loyalty_lvl">
+                            <FormGroup label="Loyalty Level" fieldId="loyalty_lvl">
                                 <FormSelect
                                     value={this.state.loyalty}
                                     onChange={this.onChangeLoyalty}
@@ -200,7 +199,7 @@ class ComfortPricing extends Component<any, ComfortPricingState> {
                             </FormGroup>
                         </FlexItem>
                         <FlexItem>
-                            <FormGroup label="Extra Services" isInline={true} fieldId="comfort_upgrade">
+                            <FormGroup label="Extra Services" fieldId="comfort_upgrade">
                                 <Checkbox
                                     label="Upgrade Comfort Package?"
                                     aria-label="comfort_upgrade"
