@@ -16,7 +16,7 @@ import {
 } from "@patternfly/react-core";
 import KieRestService from "./Services/KieRestService";
 
-interface CurrencyPickerState {
+interface ComfortPricingState {
     loyalty: string;
     comfort: boolean;
     error: {
@@ -31,7 +31,7 @@ interface CurrencyPickerState {
     firedRules: any;
 }
 
-class CurrencyPicker extends Component<any, CurrencyPickerState> {
+class ComfortPricing extends Component<any, ComfortPricingState> {
     service: KieRestService;
     constructor(props: any) {
         super(props);
@@ -146,7 +146,6 @@ class CurrencyPicker extends Component<any, CurrencyPickerState> {
             comfortFee: comfortFee[0],
             firedRules,
         });
-        console.log(this.state.firedRules);
     };
 
     render() {
@@ -235,4 +234,4 @@ class CurrencyPicker extends Component<any, CurrencyPickerState> {
     }
 }
 
-export default CurrencyPicker;
+export default ComfortPricing;
