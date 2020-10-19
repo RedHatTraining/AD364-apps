@@ -14,6 +14,9 @@ class NavDefaultList extends React.Component {
                     <NavItem id="comfort" isActive={window.location.pathname.endsWith("/comfort")}>
                         <Link to="/comfort">Comfort Upgrade Pricing</Link>
                     </NavItem>
+                    <NavItem id="summer" isActive={window.location.pathname.endsWith("/summer")}>
+                        <Link to="/summer">Summer Special Package</Link>
+                    </NavItem>
                 </NavList>
             </Nav>
         );
