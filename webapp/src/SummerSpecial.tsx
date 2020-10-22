@@ -55,27 +55,15 @@ class SummerSpecial extends Component<any, SummerSpecialState> {
 
     onChangeNumberOfAdults = (numberOfAdults: string) => {
         this.setState({ numberOfAdults });
-        //this.resetTransientState();
     };
 
     onChangeNumberOfChildren = (numberOfChildren: string) => {
         this.setState({ numberOfChildren });
-        //this.resetTransientState();
     };
 
     onChangeDiscount = (discount: string) => {
         this.setState({ discount });
-        //this.resetTransientState();
     };
-
-    // resetTransientState = () => {
-    //     this.setState({
-    //         firedRules: undefined,
-    //         numberOfAdults: "0",
-    //         numberOfChildren: "0",
-    //         discount: "NONE"
-    //     });
-    // };
 
     submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -114,7 +102,6 @@ class SummerSpecial extends Component<any, SummerSpecialState> {
             .then(this.parseKieServerData)
             .catch((err) => {
                 console.error(err);
-                //this.resetTransientState();
                 this.setState({
                     error: {
                         isActive: true,
@@ -137,15 +124,12 @@ class SummerSpecial extends Component<any, SummerSpecialState> {
     };
 
     parseKieServerData = (data: any) => {
-        console.log(JSON.stringify(data,null,2));
         const kieResultsArray = data.result["execution-results"]["results"];
         const firedRules = kieResultsArray[0].value;
 
         const Ticket = kieResultsArray[1].value
             .filter((kieObject: any) => kieObject["com.ad364.drl_review.Ticket"])
             .map((kieObject: any) => kieObject["com.ad364.drl_review.Ticket"]);
-
-            console.log(JSON.stringify(Ticket,null,2));
 
         this.setState({
             amount: Ticket[0].amount,
@@ -155,6 +139,8 @@ class SummerSpecial extends Component<any, SummerSpecialState> {
 
     render() {
         const { info, error, firedRules, amount } = this.state;
+
+        const discounts = ["NONE", "JBDIS10"];
 
         return (
             <React.Fragment>
@@ -208,11 +194,16 @@ class SummerSpecial extends Component<any, SummerSpecialState> {
                         </FlexItem>
                         <FlexItem>
                             <FormGroup label="Discount Code" fieldId="discount">
-                            <TextInput value={this.state.discount} 
-                                type="text" 
-                                onChange={this.onChangeDiscount} 
-                                css="" aria-label="text input example"
-                            />
+                            <FormSelect
+                                    value={this.state.discount}
+                                    onChange={this.onChangeDiscount}
+                                    id="discount"
+                                    aria-label="FormSelect Input"
+                                >
+                                    {discounts.map((curr, index) => (
+                                        <FormSelectOption key={index} value={curr} label={curr} />
+                                    ))}
+                                </FormSelect>
                             </FormGroup>
                         </FlexItem>
                     </Flex>
