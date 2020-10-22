@@ -12,7 +12,6 @@ import {
     TextVariants,
     Flex,
     FlexItem,
-    Checkbox,
     TextInput,
 } from "@patternfly/react-core";
 
