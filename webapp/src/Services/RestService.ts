@@ -4,7 +4,7 @@ export abstract class RestService {
     private readonly axiosInstance: AxiosInstance;
 
     constructor(
-        baseURL: string,
+        baseURL: string = "localhost:8080",
         private readonly remoteServiceName = "KieRestService",
         private readonly timeoutMs = 10000,
     ) {
