@@ -13,7 +13,6 @@ import {
     TextInput,
 } from "@patternfly/react-core";
 
-
 import KieQuarkusService from "./Services/KieQuarkusService";
 
 import { getFlightData, getFlightName } from "./Utils/FlightData";
@@ -37,21 +36,21 @@ class LastMinute extends Component<any, LastMinuteState> {
             flight: getFlightData()[0],
             error: {
                 isActive: false,
-            }
+            },
         };
         this.service = new KieQuarkusService();
     }
 
     onChangeFlight = (flightId: string) => {
         const flights = getFlightData().filter((flight: Flight) => {
-            return flight.flightId === flightId
+            return flight.flightId === flightId;
         });
-        this.setState({flight: flights[0]});
+        this.setState({ flight: flights[0] });
     };
 
     submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const {note, flight } = this.state
+        const { note, flight } = this.state;
         flight.note = note;
         flight.discounts = undefined;
         this.service
@@ -73,17 +72,17 @@ class LastMinute extends Component<any, LastMinuteState> {
         this.setState({
             error: {
                 isActive: false,
-            }
+            },
         });
     };
 
     onNoteChange = (note: string) => {
-        this.setState({note});
-    }
+        this.setState({ note });
+    };
 
     parseKieServerData = (data: Flight) => {
-        console.log(data)
-        this.setState({flight: data});
+        console.log(data);
+        this.setState({ flight: data });
     };
 
     render() {
@@ -126,19 +125,30 @@ class LastMinute extends Component<any, LastMinuteState> {
                         </FlexItem>
                         <FlexItem>
                             <FormGroup label="Note for us" fieldId="note">
-                                <TextInput value={this.state.note || ""} 
-                                type="text"
-                                onChange={this.onNoteChange} 
-                                css="" aria-label="text input example"
+                                <TextInput
+                                    value={this.state.note || ""}
+                                    type="text"
+                                    onChange={this.onNoteChange}
+                                    css=""
+                                    aria-label="text input example"
                                 />
                             </FormGroup>
                         </FlexItem>
                         <FlexItem>
-                        <div>
-                            <p><b>Flight date: </b>{flight.date.toString()}</p>
-                            <p><b>Flight Carrier: </b>{flight.carrier}</p>
-                            <p><b>Destination: </b>{getFlightName(flight.flightId)}</p>
-                        </div>
+                            <div>
+                                <p>
+                                    <b>Flight date: </b>
+                                    {flight.date.toString()}
+                                </p>
+                                <p>
+                                    <b>Flight Carrier: </b>
+                                    {flight.carrier}
+                                </p>
+                                <p>
+                                    <b>Destination: </b>
+                                    {getFlightName(flight.flightId)}
+                                </p>
+                            </div>
                         </FlexItem>
                     </Flex>
                     <span>
@@ -149,16 +159,16 @@ class LastMinute extends Component<any, LastMinuteState> {
                 </Form>
                 {flight.discounts !== undefined && (
                     <>
-                        <p className="text-container">
-                            Base price: ${flight.basePrice}
-                        </p>
+                        <p className="text-container">Base price: ${flight.basePrice}</p>
                         <p className="text-container">
                             Discounted price: $
-                            { 
-                                (1 - flight.discounts.map(e => e.amount).reduce((previous, current) => previous + current, 0)) * flight.basePrice
-                            }
+                            {(1 -
+                                flight.discounts
+                                    .map((e) => e.amount)
+                                    .reduce((previous, current) => previous + current, 0)) *
+                                flight.basePrice}
                         </p>
-                </>
+                    </>
                 )}
             </>
         );

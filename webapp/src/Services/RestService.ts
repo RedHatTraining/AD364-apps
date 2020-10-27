@@ -10,6 +10,10 @@ export abstract class RestService {
     ) {
         this.axiosInstance = Axios.create({
             baseURL,
+            auth: {
+                username: "kieserver",
+                password: "kieserver1!",
+            },
         });
         this.axiosInstance.defaults.headers.post["Content-Type"] = "application/json";
         this.axiosInstance.defaults.headers.post["accept"] = "application/json";

@@ -116,7 +116,8 @@ class ComfortPricing extends Component<any, ComfortPricingState> {
                     error: {
                         isActive: true,
                         header: "Fetching comfort pricing failed",
-                        message: `Got the following error trying to execute ${this.service.containerName}: ${err}. Check console for further information.`,
+                        message: `Got the following error trying to execute ${this.service.containerName}: ${err}. 
+                        Check console for further information.`,
                     },
                 });
             });
@@ -140,7 +141,7 @@ class ComfortPricing extends Component<any, ComfortPricingState> {
         const comfortFee = kieResultsArray[1].value
             .filter((kieObject: any) => kieObject["com.ad364.authoring_lab.ComfortFee"])
             .map((kieObject: any) => kieObject["com.ad364.authoring_lab.ComfortFee"]);
-            
+
         this.setState({
             comfortFee: comfortFee[0],
             firedRules,

@@ -1,4 +1,6 @@
-export default interface Discount {
-    amount: number,
-    reason: string
-};
+interface Discount {
+    amount: number;
+    reason: string;
+}
+
+export default Discount;

@@ -1,6 +1,6 @@
 import Flight from "../Models/Flight";
 
-export function getFlightData():Flight[] {
+export function getFlightData(): Flight[] {
     return [
         getFlight("JBT224", 40, "JBTravel"),
         getFlight("JBT112", 60, "JBTravel", getFutureDate(5)),
@@ -8,14 +8,14 @@ export function getFlightData():Flight[] {
     ];
 }
 
-function getFlight(flightId: string, basePrice: number, carrier: string, date=new Date()): Flight {
+function getFlight(flightId: string, basePrice: number, carrier: string, date = new Date()): Flight {
     return {
         flightId,
         basePrice,
         carrier,
-        date
-    }
-}   
+        date,
+    };
+}
 
 function getFutureDate(numOfDays: number): Date {
     const date = new Date();
@@ -28,6 +28,5 @@ export function getFlightName(flightId: string): string {
     mapping.set("JBT224", "Mumbai to Bangalore");
     mapping.set("JBT112", "Brno to London");
     mapping.set("JBT330", "Raleigh to Texas");
-    return mapping.get(flightId) || "Not found" ;
+    return mapping.get(flightId) || "Not found";
 }
-
