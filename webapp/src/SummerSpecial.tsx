@@ -105,7 +105,8 @@ class SummerSpecial extends Component<any, SummerSpecialState> {
                     error: {
                         isActive: true,
                         header: "Fetching pricing failed",
-                        message: `Got the following error trying to execute ${this.service.containerName}: ${err}. Check console for further information.`,
+                        message: `Got the following error trying to execute ${this.service.containerName}: ${err}. 
+                        Check console for further information.`,
                     },
                 });
             });
@@ -175,25 +176,29 @@ class SummerSpecial extends Component<any, SummerSpecialState> {
                     <Flex>
                         <FlexItem>
                             <FormGroup label="No. of Adults" fieldId="adults">
-                                <TextInput value={this.state.numberOfAdults} 
-                                type="text" 
-                                onChange={this.onChangeNumberOfAdults} 
-                                css="" aria-label="text input example"
+                                <TextInput
+                                    value={this.state.numberOfAdults}
+                                    type="text"
+                                    onChange={this.onChangeNumberOfAdults}
+                                    css=""
+                                    aria-label="text input example"
                                 />
                             </FormGroup>
                         </FlexItem>
                         <FlexItem>
                             <FormGroup label="No. of Children" fieldId="children">
-                            <TextInput value={this.state.numberOfChildren} 
-                                type="text" 
-                                onChange={this.onChangeNumberOfChildren} 
-                                css="" aria-label="text input example"
-                            />
+                                <TextInput
+                                    value={this.state.numberOfChildren}
+                                    type="text"
+                                    onChange={this.onChangeNumberOfChildren}
+                                    css=""
+                                    aria-label="text input example"
+                                />
                             </FormGroup>
                         </FlexItem>
                         <FlexItem>
                             <FormGroup label="Discount Code" fieldId="discount">
-                            <FormSelect
+                                <FormSelect
                                     value={this.state.discount}
                                     onChange={this.onChangeDiscount}
                                     id="discount"
