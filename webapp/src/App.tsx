@@ -4,6 +4,7 @@ import WelcomePage from "./Welcome";
 import ComfortPricing from "./ComfortPricing";
 import SummerSpecial from "./SummerSpecial";
 import LastMinute from "./LastMinute";
+import FraudDetection from "./FraudDetection";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -23,6 +24,9 @@ const App = () => {
                     </Route>
                     <Route path="/last-minute" exact>
                         <LastMinute />
+                    </Route>
+                    <Route path="/fraud-detection" exact>
+                        <FraudDetection />
                     </Route>
                 </Structure>
             </Switch>
