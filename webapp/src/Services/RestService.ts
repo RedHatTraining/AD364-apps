@@ -11,8 +11,8 @@ export abstract class RestService {
         this.axiosInstance = Axios.create({
             baseURL,
             auth: {
-                username: "admin",
-                password: "admin",
+                username: "kieserver",
+                password: "kieserver1!",
             },
         });
         this.axiosInstance.defaults.headers.post["Content-Type"] = "application/json";
@@ -24,6 +24,7 @@ export abstract class RestService {
             const r = await this.axiosInstance.get<T>(url, { timeout: this.timeoutMs });
             return r.data;
         } catch (e) {
+            console.error(e);
             throw new RESTConnectionError(e, this.remoteServiceName, e.response?.status);
         }
     }
@@ -33,6 +34,7 @@ export abstract class RestService {
             const r = await this.axiosInstance.post<R>(url, body, { timeout: this.timeoutMs });
             return r.data;
         } catch (e) {
+            console.error(e);
             throw new RESTConnectionError(e, this.remoteServiceName, e.response?.status);
         }
     }

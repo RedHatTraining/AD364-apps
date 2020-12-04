@@ -20,7 +20,8 @@
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"

@@ -10,9 +10,14 @@ import {
     FlexItem,
     TextInput,
     Checkbox,
+    Card,
+    CardBody,
+    CardHeader,
 } from "@patternfly/react-core";
 
 import KieDMNService from "./Services/KieDMNService";
+import ErrorCircleOIcon from "@patternfly/react-icons/dist/js/icons/error-circle-o-icon";
+import OkIcon from "@patternfly/react-icons/dist/js/icons/ok-icon";
 
 interface FraudDetectionState {
     lastMinute: boolean;
@@ -23,6 +28,12 @@ interface FraudDetectionState {
     paidLPValid: boolean;
     paidMoney: number;
     paidMoneyValid: boolean;
+    submitButtonValid: boolean;
+    fraudAction?: {
+        freezeAccount: boolean;
+        score: number;
+        permitTransaction: boolean;
+    };
     error: {
         isActive: boolean;
         header?: string;
@@ -43,6 +54,7 @@ class FraudDetection extends Component<any, FraudDetectionState> {
             paidLPValid: true,
             paidMoney: 0,
             paidMoneyValid: true,
+            submitButtonValid: true,
             error: {
                 isActive: false,
             },
@@ -80,9 +92,31 @@ class FraudDetection extends Component<any, FraudDetectionState> {
         }`;
         try {
             const res = await this.service.fireDMN(payload);
-            console.log(res);
+            const decisionResults = res.result["dmn-evaluation-result"]["dmn-context"]["Determine Fraud Action"];
+            if (decisionResults === undefined) {
+                console.error(
+                    "Could not find 'Determine Fraud Action' object in the dmn context; is DMN correctly named?",
+                );
+                throw new Error();
+            }
+            this.setState({
+                fraudAction: {
+                    freezeAccount: decisionResults.freezeAccount,
+                    score: decisionResults.score,
+                    permitTransaction: decisionResults.permitTransaction,
+                },
+            });
+            console.log(this.state.fraudAction);
         } catch (e) {
             console.log(e);
+            this.setState({
+                error: {
+                    isActive: true,
+                    header: "Fetching fraud score failed",
+                    message: `Trying to execute ${this.service.containerName}.
+                    \nCheck console for further information.`,
+                },
+            });
         }
     };
 
@@ -98,19 +132,29 @@ class FraudDetection extends Component<any, FraudDetectionState> {
         return "[{\"isLastMinute\": true}]";
     };
 
-    onChangeAcquiredLP = (val: string) => {
+    onChangeAcquiredLP = async (val: string) => {
         const recentlyAcquiredLPValid = this.isPositiveNum(val);
-        this.setState({ recentlyAcquiredLP: Number(val), recentlyAcquiredLPValid });
+        await this.setState({ recentlyAcquiredLP: Number(val), recentlyAcquiredLPValid });
+        this.validateSubmitButton();
     };
 
-    onChangePaidLP = (val: string) => {
+    validateSubmitButton = () => {
+        const { recentlyAcquiredLPValid, paidLPValid, paidMoneyValid } = this.state;
+        this.setState({
+            submitButtonValid: recentlyAcquiredLPValid && paidLPValid && paidMoneyValid,
+        });
+    };
+
+    onChangePaidLP = async (val: string) => {
         const paidLPValid = this.isPositiveNum(val);
-        this.setState({ paidLP: Number(val), paidLPValid });
+        await this.setState({ paidLP: Number(val), paidLPValid });
+        this.validateSubmitButton();
     };
 
-    onChangePaidMoney = (val: string) => {
+    onChangePaidMoney = async (val: string) => {
         const paidMoneyValid = this.isPositiveNum(val);
-        this.setState({ paidMoney: Number(val), paidMoneyValid });
+        await this.setState({ paidMoney: Number(val), paidMoneyValid });
+        this.validateSubmitButton();
     };
 
     isPositiveNum = (val: string): boolean => {
@@ -118,8 +162,16 @@ class FraudDetection extends Component<any, FraudDetectionState> {
         return !isNaN(numVal) && numVal >= 0;
     };
 
+    determineCardClassName = (): string => {
+        const { fraudAction } = this.state;
+        if (fraudAction === undefined) return "";
+        if (fraudAction?.score < 0.3) return "border-top-blue";
+        if (fraudAction?.score < 0.6) return "border-top-yellow";
+        return "border-top-red";
+    };
+
     render() {
-        const { error } = this.state;
+        const { error, fraudAction } = this.state;
 
         return (
             <>
@@ -199,18 +251,37 @@ class FraudDetection extends Component<any, FraudDetectionState> {
                         </FlexItem>
                     </Flex>
                     <span>
-                        <Button css="" type="submit" variant="primary">
+                        <Button css="" type="submit" isDisabled={!this.state.submitButtonValid} variant="primary">
                             Get price
                         </Button>
                     </span>
                 </Form>
-                {false && (
+                {fraudAction && (
                     <>
-                        {/* result here 
-                        
-                        
-                        
-                        */}
+                        <Card className={this.determineCardClassName()} style={{ margin: "20px", float: "left" }}>
+                            <CardHeader>Fraud action recommendation</CardHeader>
+                            <CardBody>
+                                <TextContent className="align-icons">
+                                    <p>
+                                        Allow transaction:{" "}
+                                        {fraudAction.permitTransaction ? (
+                                            <OkIcon size="md" color="var(--pf-global--success-color--200)" />
+                                        ) : (
+                                            <ErrorCircleOIcon size="md" color="var(--pf-global--danger-color--100)" />
+                                        )}
+                                    </p>
+                                    <p>
+                                        Freeze account:{" "}
+                                        {fraudAction.freezeAccount ? (
+                                            <OkIcon size="md" color="var(--pf-global--danger-color--100)" />
+                                        ) : (
+                                            <ErrorCircleOIcon size="md" color="var(--pf-global--success-color--200)" />
+                                        )}
+                                    </p>
+                                    <p>Fraud score: {fraudAction.score}</p>
+                                </TextContent>
+                            </CardBody>
+                        </Card>
                     </>
                 )}
             </>

@@ -6,7 +6,7 @@ export default class KieDMNService extends RestService {
     }
 
     public async fireDMN(payload: string) {
-        let dmnInfo: any = await this.get(
+        const dmnInfo: any = await this.get(
             `http://localhost:8080/kie-server/services/rest/server/containers/${this.containerName}/dmn`,
         );
         const dmnNamespace = dmnInfo.result["dmn-model-info-list"]["models"][0]["model-namespace"];
