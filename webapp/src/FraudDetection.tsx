@@ -95,7 +95,8 @@ class FraudDetection extends Component<any, FraudDetectionState> {
             const decisionResults = res.result["dmn-evaluation-result"]["dmn-context"]["Determine Fraud Action"];
             if (decisionResults === undefined) {
                 console.error(
-                    "Could not find 'Determine Fraud Action' object in the dmn context; is DMN correctly named?",
+                    "Could not find 'Determine Fraud Action' object in the dmn context;" +
+                        "is the DMN decision node correctly named?",
                 );
                 throw new Error();
             }
@@ -112,8 +113,7 @@ class FraudDetection extends Component<any, FraudDetectionState> {
                 error: {
                     isActive: true,
                     header: "Fetching fraud score failed",
-                    message: `Trying to execute ${this.service.containerName}.
-                    \nCheck console for further information.`,
+                    message: `Trying to execute ${this.service.containerName}. Check console for further information.`,
                 },
             });
         }
