@@ -106,9 +106,8 @@ class FraudDetection extends Component<any, FraudDetectionState> {
                     permitTransaction: decisionResults.permitTransaction,
                 },
             });
-            console.log(this.state.fraudAction);
         } catch (e) {
-            console.log(e);
+            console.error(e);
             this.setState({
                 error: {
                     isActive: true,
@@ -252,7 +251,7 @@ class FraudDetection extends Component<any, FraudDetectionState> {
                     </Flex>
                     <span>
                         <Button css="" type="submit" isDisabled={!this.state.submitButtonValid} variant="primary">
-                            Get price
+                            Get score
                         </Button>
                     </span>
                 </Form>

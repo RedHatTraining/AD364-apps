@@ -2,7 +2,7 @@ import { RestService } from "./RestService";
 
 export default class KieDMNService extends RestService {
     constructor(readonly containerName: string) {
-        super("");
+        super();
     }
 
     public async fireDMN(payload: string) {
