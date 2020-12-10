@@ -1,0 +1,13 @@
+package com.demos.event_planner;
+
+rule "move-guest-to-table"
+	dialect "mvel"
+	when
+		Event( $tableSize : tableSize != null )
+		$guest : Guest( $partyName : party != null , entree != null )
+		$table : Table( name == $partyName , guests.size() < $tableSize )
+	then
+		$table.getGuests().add($guest);
+		retract($guest);
+		update($table);
+end
