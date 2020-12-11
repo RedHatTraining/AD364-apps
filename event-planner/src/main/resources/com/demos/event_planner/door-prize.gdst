@@ -13,7 +13,20 @@
     <width>150</width>
   </ruleNameColumn>
   <metadataCols/>
-  <attributeCols/>
+  <attributeCols>
+    <attribute-column52>
+      <typedDefaultValue>
+        <valueString>set-meals</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </typedDefaultValue>
+      <hideColumn>true</hideColumn>
+      <width>100</width>
+      <attribute>ruleflow-group</attribute>
+      <reverseOrder>false</reverseOrder>
+      <useRowNumber>false</useRowNumber>
+    </attribute-column52>
+  </attributeCols>
   <conditionPatterns>
     <org.drools.workbench.models.guided.dtable.shared.model.BRLConditionColumn>
       <hideColumn>false</hideColumn>
@@ -393,6 +406,11 @@
         <isOtherwise>false</isOtherwise>
       </value>
       <value>
+        <valueString>set-meals</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
         <valueBoolean>true</valueBoolean>
         <valueString></valueString>
         <dataType>BOOLEAN</dataType>
@@ -439,6 +457,11 @@
         <isOtherwise>false</isOtherwise>
       </value>
       <value>
+        <valueString>set-meals</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
         <valueBoolean>true</valueBoolean>
         <valueString></valueString>
         <dataType>BOOLEAN</dataType>
@@ -481,6 +504,11 @@
       </value>
       <value>
         <valueString></valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>set-meals</valueString>
         <dataType>STRING</dataType>
         <isOtherwise>false</isOtherwise>
       </value>

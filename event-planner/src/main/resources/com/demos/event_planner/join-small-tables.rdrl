@@ -4,6 +4,7 @@ import java.lang.Number;
 
 rule "join-small-tables"
 	dialect "mvel"
+	ruleflow-group "seat-guests"
 	when
 		Event( $tableSize : tableSize != null )
 		not (Guest( )) 

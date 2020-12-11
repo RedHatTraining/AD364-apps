@@ -13,7 +13,20 @@
     <width>150</width>
   </ruleNameColumn>
   <metadataCols/>
-  <attributeCols/>
+  <attributeCols>
+    <attribute-column52>
+      <typedDefaultValue>
+        <valueString>set-meals</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </typedDefaultValue>
+      <hideColumn>true</hideColumn>
+      <width>100</width>
+      <attribute>ruleflow-group</attribute>
+      <reverseOrder>false</reverseOrder>
+      <useRowNumber>false</useRowNumber>
+    </attribute-column52>
+  </attributeCols>
   <conditionPatterns>
     <Pattern52>
       <factType>Guest</factType>
@@ -60,34 +73,60 @@
     </Pattern52>
   </conditionPatterns>
   <actionCols>
-    <set-field-col52>
-      <typedDefaultValue>
-        <valueString></valueString>
-        <dataType>STRING</dataType>
-        <isOtherwise>false</isOtherwise>
-      </typedDefaultValue>
+    <org.drools.workbench.models.guided.dtable.shared.model.BRLActionColumn>
       <hideColumn>false</hideColumn>
-      <width>214</width>
-      <header>Entree</header>
-      <boundName>$guest</boundName>
-      <factField>entree</factField>
-      <type>String</type>
-      <update>false</update>
-    </set-field-col52>
-    <set-field-col52>
-      <typedDefaultValue>
-        <valueString></valueString>
-        <dataType>STRING</dataType>
-        <isOtherwise>false</isOtherwise>
-      </typedDefaultValue>
-      <hideColumn>false</hideColumn>
-      <width>100</width>
-      <header>Dessert</header>
-      <boundName>$guest</boundName>
-      <factField>dessert</factField>
-      <type>String</type>
-      <update>false</update>
-    </set-field-col52>
+      <width>-1</width>
+      <header>Guest Meal</header>
+      <definition>
+        <org.drools.workbench.models.datamodel.rule.ActionUpdateField>
+          <fieldValues>
+            <org.drools.workbench.models.datamodel.rule.ActionFieldValue>
+              <field>entree</field>
+              <value>$entree</value>
+              <nature>7</nature>
+              <type>String</type>
+            </org.drools.workbench.models.datamodel.rule.ActionFieldValue>
+            <org.drools.workbench.models.datamodel.rule.ActionFieldValue>
+              <field>dessert</field>
+              <value>$dessert</value>
+              <nature>7</nature>
+              <type>String</type>
+            </org.drools.workbench.models.datamodel.rule.ActionFieldValue>
+          </fieldValues>
+          <variable>$guest</variable>
+        </org.drools.workbench.models.datamodel.rule.ActionUpdateField>
+      </definition>
+      <childColumns>
+        <org.drools.workbench.models.guided.dtable.shared.model.BRLActionVariableColumn>
+          <typedDefaultValue>
+            <valueString></valueString>
+            <dataType>STRING</dataType>
+            <isOtherwise>false</isOtherwise>
+          </typedDefaultValue>
+          <hideColumn>false</hideColumn>
+          <width>100</width>
+          <header>Guest Meal</header>
+          <varName>$entree</varName>
+          <fieldType>String</fieldType>
+          <factType>Guest</factType>
+          <factField>entree</factField>
+        </org.drools.workbench.models.guided.dtable.shared.model.BRLActionVariableColumn>
+        <org.drools.workbench.models.guided.dtable.shared.model.BRLActionVariableColumn>
+          <typedDefaultValue>
+            <valueString></valueString>
+            <dataType>STRING</dataType>
+            <isOtherwise>false</isOtherwise>
+          </typedDefaultValue>
+          <hideColumn>false</hideColumn>
+          <width>100</width>
+          <header>Guest Meal</header>
+          <varName>$dessert</varName>
+          <fieldType>String</fieldType>
+          <factType>Guest</factType>
+          <factField>dessert</factField>
+        </org.drools.workbench.models.guided.dtable.shared.model.BRLActionVariableColumn>
+      </childColumns>
+    </org.drools.workbench.models.guided.dtable.shared.model.BRLActionColumn>
   </actionCols>
   <auditLog>
     <filter class="org.drools.guvnor.client.modeldriven.dt52.auditlog.DecisionTableAuditLogFilter">
@@ -142,6 +181,11 @@
         <isOtherwise>false</isOtherwise>
       </value>
       <value>
+        <valueString>set-meals</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
         <valueBoolean>true</valueBoolean>
         <valueString></valueString>
         <dataType>BOOLEAN</dataType>
@@ -177,6 +221,11 @@
       </value>
       <value>
         <valueString></valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>set-meals</valueString>
         <dataType>STRING</dataType>
         <isOtherwise>false</isOtherwise>
       </value>
@@ -220,6 +269,11 @@
         <isOtherwise>false</isOtherwise>
       </value>
       <value>
+        <valueString>set-meals</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
         <valueBoolean>true</valueBoolean>
         <valueString></valueString>
         <dataType>BOOLEAN</dataType>
@@ -255,6 +309,11 @@
       </value>
       <value>
         <valueString></valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>set-meals</valueString>
         <dataType>STRING</dataType>
         <isOtherwise>false</isOtherwise>
       </value>
@@ -298,6 +357,11 @@
         <isOtherwise>false</isOtherwise>
       </value>
       <value>
+        <valueString>set-meals</valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
         <valueBoolean>true</valueBoolean>
         <valueString></valueString>
         <dataType>BOOLEAN</dataType>
@@ -333,6 +397,11 @@
       </value>
       <value>
         <valueString></valueString>
+        <dataType>STRING</dataType>
+        <isOtherwise>false</isOtherwise>
+      </value>
+      <value>
+        <valueString>set-meals</valueString>
         <dataType>STRING</dataType>
         <isOtherwise>false</isOtherwise>
       </value>

@@ -1,5 +1,9 @@
 <kmodule xmlns="http://www.drools.org/xsd/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <kbase name="default-kie-base" default="true" eventProcessingMode="stream" equalsBehavior="identity">
-    <ksession name="default-kie-session" type="stateless" default="true" clockType="realtime"/>
+    <ksession name="default-kie-session" type="stateless" default="true" clockType="realtime">
+      <listeners>
+        <agendaEventListener type="org.drools.core.event.DebugAgendaEventListener"/>
+      </listeners>
+    </ksession>
   </kbase>
 </kmodule>
