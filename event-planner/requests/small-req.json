@@ -1,0 +1,27 @@
+{
+    "lookup": "default-kie-session",
+    "commands": [
+        {"insert": {"object": {"com.demos.event_planner.Event": { "tableSize": 3 }}}},
+        {"insert": {"object": {"com.demos.event_planner.Guest": { "name": "Alice"  , "party": "Tanner", "age": 34, "peanutAllergy": false, "meatPreference": "beef" }}}},
+        {"insert": {"object": {"com.demos.event_planner.Guest": { "name": "Mark"   , "party": "Tanner", "age": 35, "peanutAllergy": true , "meatPreference": "beef" }}}},
+        {"insert": {"object": {"com.demos.event_planner.Guest": { "name": "Brendan", "party": "Tanner", "age": 6 , "peanutAllergy": false, "meatPreference": "chicken" }}}},
+        {"insert": {"object": {"com.demos.event_planner.Guest": { "name": "Joseph" , "party": "Tanner", "age": 17, "peanutAllergy": false, "meatPreference": "beef" }}}},
+        {"insert": {"object": {"com.demos.event_planner.Guest": { "name": "Bruce"  , "party": "Jacobs", "age": 23, "peanutAllergy": false, "meatPreference": "vegetarian" }}}},
+        {
+            "start-process": {
+                "processId": "event-planner.plan-event",
+                "data": null,
+                "parameter": [],
+                "out-identifier" : "processActivations"
+            }
+        },
+        {
+            "get-objects" : {
+              "class-object-filter" : {
+                "string" : "java.lang.Object"
+              },
+              "out-identifier" : "output"
+            }
+        }
+    ]
+}
