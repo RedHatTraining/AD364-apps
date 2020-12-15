@@ -2,14 +2,16 @@
     "lookup": "default-kie-session",
     "commands": [
         {"insert": {"object": {"com.demos.event_planner.Guest": { "name": "Alice"  , "party": "Tanner", "age": 34, "peanutAllergy": false, "meatPreference": "beef" }}}},
+        {"insert": {"object": {"com.demos.event_planner.BarRequest": {"guestName": "Alice", "totalAlcohol": 500, "requestTime": "2020-12-14T12:00:00.000-0600"}}}},
+        {"insert": {"object": {"com.demos.event_planner.BarRequest": {"guestName": "Alice", "totalAlcohol": 200, "requestTime": "2020-12-14T12:05:05.000-0600"}}}},
         {
           "set-focus": {
-            "name": "set-meals"
+            "name": "open-bar"
           }
         },
         {
             "fire-all-rules" : {
-                "max" : -1,
+                "max" : 100,
                 "out-identifier" : "firedActivations"
             }
         },

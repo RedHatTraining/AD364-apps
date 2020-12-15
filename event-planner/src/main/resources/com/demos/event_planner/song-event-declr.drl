@@ -1,0 +1,15 @@
+package com.demos.event_planner;
+
+import com.demos.event_planner.SongEvent;
+import com.demos.event_planner.BarRequest;
+
+declare SongEvent
+    @role(event)
+    @timestamp(startTime)
+    @duration(duration)
+end
+
+declare BarRequest
+    @role(event)
+    @timestamp(requestTime)
+end
