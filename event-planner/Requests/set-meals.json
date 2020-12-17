@@ -1,0 +1,27 @@
+{
+    "container": "Dining",
+    "lookup": "default-kie-session",
+    "commands": [
+        {"insert": {"object": {"com.eventplanning.dataobjects.Event": { "tableSize": 3 }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Alice"  , "party": "Tanner", "age": 34, "peanutAllergy": false, "meatPreference": "beef" }}}},
+        {
+          "set-focus": {
+            "name": "set-meals"
+          }
+        },
+        {
+            "fire-all-rules" : {
+                "max" : -1,
+                "out-identifier" : "firedActivations"
+            }
+        },
+        {
+            "get-objects" : {
+              "class-object-filter" : {
+                "string" : "java.lang.Object"
+              },
+              "out-identifier" : "output"
+            }
+        }
+    ]
+}

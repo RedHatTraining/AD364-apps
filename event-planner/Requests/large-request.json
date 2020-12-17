@@ -1,0 +1,34 @@
+{
+    "container": "Dining",
+    "lookup": "default-kie-session",
+    "commands": [
+        {"insert": {"object": {"com.eventplanning.dataobjects.Event": { "tableSize": 6 }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Alice"  , "party": "Tanner", "age": 34, "peanutAllergy": false, "meatPreference": "beef" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Mark"   , "party": "Tanner", "age": 35, "peanutAllergy": true , "meatPreference": "beef" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Brendan", "party": "Tanner", "age": 6 , "peanutAllergy": false, "meatPreference": "chicken" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Joseph" , "party": "Tanner", "age": 17, "peanutAllergy": false, "meatPreference": "beef" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "David"  , "party": "Tanner", "age": 15, "peanutAllergy": true , "meatPreference": "chicken" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Jeremy" , "party": "Tanner", "age": 23, "peanutAllergy": false, "meatPreference": "chicken" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Kilby"  , "party": "Tanner", "age": 40, "peanutAllergy": true , "meatPreference": "beef" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Britney", "party": "Tanner", "age": 42, "peanutAllergy": false, "meatPreference": "chicken" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Kaleb"  , "party": "Tanner", "age": 80, "peanutAllergy": false, "meatPreference": "chicken" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Nancy"  , "party": "Tanner", "age": 19, "peanutAllergy": true , "meatPreference": "vegetarian" }}}},
+        {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Bruce"  , "party": "Jacobs", "age": 23, "peanutAllergy": false, "meatPreference": "vegetarian" }}}},
+        {
+            "start-process": {
+                "processId": "event-planner.plan-event",
+                "data": null,
+                "parameter": [],
+                "out-identifier": null
+            }
+        },
+        {
+            "get-objects" : {
+              "class-object-filter" : {
+                "string" : "java.lang.Object"
+              },
+              "out-identifier" : "output"
+            }
+        }
+    ]
+}
