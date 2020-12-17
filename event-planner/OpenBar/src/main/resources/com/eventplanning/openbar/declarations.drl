@@ -1,0 +1,8 @@
+package com.eventplanning.openbar;
+
+import com.eventplanning.dataobjects.BarRequest;
+
+declare BarRequest
+    @role(event)
+    @timestamp(requestTime)
+end

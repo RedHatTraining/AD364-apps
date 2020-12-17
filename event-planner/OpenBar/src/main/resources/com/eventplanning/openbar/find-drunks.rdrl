@@ -1,0 +1,16 @@
+package com.eventplanning.openbar;
+
+import com.eventplanning.dataobjects.BarRequest;
+
+import java.lang.Number;
+
+rule "find-drunks"
+	dialect "mvel"
+	when
+		$lastReq : BarRequest( $guestName : guestName, $lastAlc : totalAlcohol, $lastTime : requestTime)
+		Number( $totalAlc : intValue() > 0 ) from accumulate ( BarRequest( guestName == $guestName , $reqAlc : totalAlcohol, this meets [30m] $lastReq , this before $lastReq ),
+			sum($reqAlc)) 
+		eval( $lastAlc + $totalAlc > 200 )
+	then
+		System.out.println($guestName + " has had " + $lastAlc + "ml and " + $totalAlc + "ml at " + $lastTime);
+end
