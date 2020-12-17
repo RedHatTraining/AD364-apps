@@ -1,0 +1,11 @@
+<kmodule xmlns="http://www.drools.org/xsd/kmodule" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <kbase name="default-kie-base" default="true" eventProcessingMode="cloud" equalsBehavior="identity">
+    <ksession name="default-kie-session" type="stateless" default="true" clockType="realtime">
+      <listeners>
+        <agendaEventListener type="com.eventplanning.listeners.TabbedAgendaEventListener"/>
+        <ruleRuntimeEventListener type="com.eventplanning.listeners.TabbedRuleRuntimeEventListener"/>
+        <processEventListener type="com.eventplanning.listeners.TabbedProcessEventListener"/>
+      </listeners>
+    </ksession>
+  </kbase>
+</kmodule>

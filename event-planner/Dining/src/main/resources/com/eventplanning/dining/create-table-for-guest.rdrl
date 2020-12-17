@@ -1,0 +1,20 @@
+package com.eventplanning.dining;
+
+import java.lang.Number;
+import java.lang.String;
+import com.eventplanning.dataobjects.Event;
+import com.eventplanning.dataobjects.Guest;
+import com.eventplanning.dataobjects.Table;
+
+rule "create-table-for-guest"
+	dialect "mvel"
+	ruleflow-group "seat-guests"
+	when
+		Event( $tableSize : tableSize != null )
+		Guest( $partyName : party != null )
+		not (Table( name == $partyName , guests.size() < $tableSize )) 
+	then
+		Table table = new Table();
+		table.setName( $partyName );
+		insert( table );
+end

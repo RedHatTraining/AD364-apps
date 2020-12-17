@@ -1,3 +1,0 @@
-package com.demos.event_planner;
-
-global java.lang.Integer maxTables;

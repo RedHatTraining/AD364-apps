@@ -1,0 +1,22 @@
+package com.eventplanning.dining;
+
+import java.lang.Number;
+import com.eventplanning.dataobjects.Event;
+import com.eventplanning.dataobjects.Guest;
+import com.eventplanning.dataobjects.Table;
+
+rule "join-small-tables"
+	dialect "mvel"
+	ruleflow-group "seat-guests"
+	when
+		Event( $tableSize : tableSize != null )
+		not (Guest( )) 
+		$firstTable : Table( $firstTableSize : guests.size() < $tableSize )
+		$secondTable : Table( this != $firstTable , $secondTableSize : guests.size() < $tableSize , eval( $firstTableSize + $secondTableSize <= $tableSize ))
+	then
+		$firstTable.getGuests().addAll($secondTable.getGuests());
+		modify( $firstTable ) {
+				setName( "mixed" )
+		}
+		retract( $secondTable );
+end
