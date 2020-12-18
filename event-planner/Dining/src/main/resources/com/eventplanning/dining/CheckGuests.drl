@@ -1,0 +1,27 @@
+package com.eventplanning.dining;
+
+import com.eventplanning.dataobjects.Guest;
+import com.eventplanning.dataobjects.TotallyNecessaryExternalUtilityClass;
+
+rule "ScrutinizeGuest"
+    ruleflow-group "seat-guests"
+    // I want this to happen first so that I don't waste time on guests that are going to be kicked anyway
+    salience 20
+    when
+        $guest : Guest( $name : name )
+        eval( TotallyNecessaryExternalUtilityClass.scrutinize($name) )
+    then
+        retract( $guest );
+        System.out.println($name + " was removed from the event for having a \"weird\" name.");
+        insert($name + " was removed from the event for having a \"weird\" name.");
+end
+
+rule "PrepareGuestForSeating"
+    ruleflow-group "seat-guests"
+    salience 10
+    when
+        $guest : Guest( $name : name )
+    then
+        System.out.println("Preparing guest " + $name);
+        TotallyNecessaryExternalUtilityClass.unnecessarilyExpensiveOperation($guest);
+end

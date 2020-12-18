@@ -1,0 +1,31 @@
+{
+  "container": "Dining",
+  "lookup" : "default-kie-session",
+  "commands" : [
+    {
+      "insert" : {
+        "object" : {
+	      "com.eventplanning.dataobjects.Table": {
+            "name": "mixed",
+            "guests": [
+              { "name": "Alice", "party": "Tanner", "age": 34, "entree": "Balsamic Steak Salad", "dessert": "Fudge Sundae", "peanutAllergy": false, "doorPrize": [], "meatPreference": "beef" },
+              { "name": "Mark",  "party": "Tanner", "age": 35, "entree": "Mongolian Beef",       "dessert": "Lava Cake",    "peanutAllergy": true,  "doorPrize": [], "meatPreference": "beef" },
+              { "name": "Bruce", "party": "Jacobs", "age": 23, "entree": "White Pesto Pasta",    "dessert": "Fudge Sundae", "peanutAllergy": false, "doorPrize": [], "meatPreference": "vegetarian" }
+            ]
+          }
+        },
+        "out-identifier" : null,
+        "return-object" : true,
+        "entry-point" : "DEFAULT",
+        "disconnected" : false
+      }
+    },
+    {
+	  "query" : {
+        "name" : "findGuestAtTable",
+        "arguments" : [ "Alice" ],
+        "out-identifier" : "output"
+      }
+    }
+  ]
+}

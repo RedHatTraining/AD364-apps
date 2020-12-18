@@ -1,0 +1,12 @@
+package com.eventplanning.dining;
+
+import com.eventplanning.dataobjects.Guest;
+import com.eventplanning.dataobjects.Table;
+
+query findGuestAtTable(String guestName)
+    Table($guests : guests ) and Guest( name == guestName ) from $guests
+end
+
+query findTable(String tableName)
+    Table( tableName == name )
+end
