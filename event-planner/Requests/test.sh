@@ -13,7 +13,7 @@ output=$(curl -s -X POST "http://${SERVERIP}:8080/kie-server/services/rest/serve
   --data-binary "@${PAYLOADFILE}")
 
 # Print results
-echo $output
+
 # This value isn't returned when executing a process
 activations=$(echo $output | jq '.result."execution-results".results[] | select(.key=="firedActivations") | .value')
 if [ "" != "$activations"  ]; then

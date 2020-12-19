@@ -18,7 +18,7 @@
         {
             "get-objects" : {
               "class-object-filter" : {
-                "string" : "java.lang.Object"
+                "string" : "com.eventplanning.dataobjects.Table"
               },
               "out-identifier" : "output"
             }
