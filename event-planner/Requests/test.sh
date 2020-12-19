@@ -1,8 +1,8 @@
 #!/bin/env bash
 
-USERNAME="mike"
-PASSWORD="mike"
-SERVERIP="10.0.0.11"
+USERNAME="dmAdmin"
+PASSWORD="redhatdm1!"
+SERVERIP="localhost"
 CONTAINER_ID=$(cat "$1" | jq -r '.container')
 PAYLOADFILE="$1"
 
@@ -13,7 +13,7 @@ output=$(curl -s -X POST "http://${SERVERIP}:8080/kie-server/services/rest/serve
   --data-binary "@${PAYLOADFILE}")
 
 # Print results
-
+echo $output
 # This value isn't returned when executing a process
 activations=$(echo $output | jq '.result."execution-results".results[] | select(.key=="firedActivations") | .value')
 if [ "" != "$activations"  ]; then
@@ -21,5 +21,11 @@ if [ "" != "$activations"  ]; then
   echo "$activations"
 fi
 
-printf "Facts in working memory: "
+messages=$(echo $output | jq '.result."execution-results".results[] | select(.key=="messages") | .value')
+if [ "" != "$messages"  ]; then
+  printf "Messages: "
+  echo "$messages"
+fi
+
+printf "Output: "
 echo $output | jq '.result."execution-results".results[] | select(.key=="output") | .value'

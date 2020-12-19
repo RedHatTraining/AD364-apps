@@ -5,17 +5,27 @@
         {"insert": {"object": {"com.eventplanning.dataobjects.Event": { "tableSize": 3 }}}},
         {"insert": {"object": {"com.eventplanning.dataobjects.Guest": { "name": "Alice"  , "party": "Tanner", "age": 34, "peanutAllergy": false, "meatPreference": "beef" }}}},
         {
-            "fire-all-rules" : {
-                "max" : -1,
-                "out-identifier" : "firedActivations"
+            "start-process": {
+                "processId": "event-planner.plan-event",
+                "data": null,
+                "parameter": [],
+                "out-identifier": null
             }
         },
         {
             "get-objects" : {
               "class-object-filter" : {
-                "string" : "java.lang.Object"
+                "string" : "com.eventplanning.dataobjects.Table"
               },
               "out-identifier" : "output"
+            }
+        },
+        {
+            "get-objects" : {
+              "class-object-filter" : {
+                "string" : "java.lang.String"
+              },
+              "out-identifier" : "messages"
             }
         }
     ]

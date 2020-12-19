@@ -1,0 +1,24 @@
+{
+  "container": "GoodieBags",
+  "model-namespace":"https://kiegroup.org/dmn/_36CE08EC-D254-4ACE-BA15-22EDAA6F6611",
+  "model-name":"AssignGoodieBagItems",
+  "decision-name":null,
+  "decision-id":null,
+  "dmn-context":{
+    "Guest": {
+      "name":"Mary",
+      "party":"Adams",
+      "age":23,
+      "peanutAllergy":false
+    },
+    "DoorPrizes":[
+	  {
+        "minAge":12,
+        "name":"Lego Set"
+      }, {
+        "minAge":21,
+        "name":"Amazon Gift Card"
+      }
+    ]
+  }
+}
