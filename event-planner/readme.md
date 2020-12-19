@@ -1,4 +1,5 @@
 
+
 # Event Planner - rule project demonstration
 
 This project demonstrates certain aspects of building and testing a project in Red Hat Decision Manager. Included is a script and example requests to test the project after it is deployed on a kie-server in the folder 'requests'
@@ -25,26 +26,24 @@ This project demonstrates certain aspects of building and testing a project in R
 4. Save the location of the server home directory for future use
 `echo "export JBOSS_HOME=$(pwd)/target/jboss-eap-7.3" >> ~/.bashrc`
 `source ~/.bashrc`
-6. (Optional) Set your own credentials if you would like to use something other than the default dmAdmin/redhatdm1!
-`$JBOSS_HOME/bin/add-user.sh -a -r ApplicationRealm -u <user> -p <password> -ro analyst,admin,manager,user,kie-server,kiemgmt,rest-all --silent`
-7. Start the decision manager server. If you are planning to connect to this server from another computer on your network use the '-b 0.0.0.0' switch to open up the listener to external IP addresses
+5. Start the decision manager server. If you are planning to connect to this server from another computer on your network use the '-b 0.0.0.0' switch to open up the listener to external IP addresses
 `$JBOSS_HOME/bin/standalone.sh -b 0.0.0.0`
-8. Open a new terminal window.
-9. Connect to the EAP server using the JBoss Command Line Interface
+6. Open a new terminal window.
+7. Connect to the EAP server using the JBoss Command Line Interface
 `$JBOSS_HOME/bin/jboss-cli.sh --connect`
-10. Tell the JSON marshaller for the EAP server to print dates to a human readable format
+8. Tell the JSON marshaller for the EAP server to print dates to a human readable format
 `/system-property=org.kie.server.json.format.date:add(value=true)`
-11. Create a new file handler to output listener events
+9. Create a new file handler to output listener events
 `/subsystem=logging/file-handler=listeners_log:add(file={"path"=>"listeners.log", "relative-to"=>"jboss.server.log.dir"})`
-12.  Create 3 new logging categories for the customer kie listeners that do not route to the root logger
+10.  Create 3 new logging categories for the customer kie listeners that do not route to the root logger
 `/subsystem=logging/logger=org.kie.api.event.rule.RuleRuntimeEventListener:add(level=DEBUG, use-parent-handlers=false)`
 `/subsystem=logging/logger=org.kie.api.event.process.ProcessEventListener:add(level=DEBUG, use-parent-handlers=false)`
 `/subsystem=logging/logger=org.kie.api.event.rule.AgendaEventListener:add(level=DEBUG, use-parent-handlers=false)`
-13. Add the newly created file handler to the kie listener categories so that they print to a separate file
+11. Add the newly created file handler to the kie listener categories so that they print to a separate file
 `/subsystem=logging/logger=org.kie.api.event.rule.RuleRuntimeEventListener:add-handler(name="listeners_log")`
 `/subsystem=logging/logger=org.kie.api.event.process.ProcessEventListener:add-handler(name="listeners_log")`
 `/subsystem=logging/logger=org.kie.api.event.rule.AgendaEventListener:add-handler(name="listeners_log")`
-14. Exit the JBoss CLI
+12. Exit the JBoss CLI
 `exit`
 
 ## Creating Projects on Decision Manager
@@ -70,14 +69,12 @@ This project demonstrates certain aspects of building and testing a project in R
 
 5. In a terminal window create a new folder to clone the DM projects to a working copy
 `mkdir $AD364_HOME/rhdm-working-copy && cd $AD364_HOME/rhdm-working-copy`
-6. Move to the AD364-apps/event-planner/Projects directory
-`cd $AD364_HOME/AD364-apps/event-planner/Projects/`
-7. For each project: clone the DM project down to the working copy, add the files from AD364-apps to the working copy, commit, and push back to DM
-```
-for dir in *;
-    do git clone 'http://dmAdmin:redhatdm1!@localhost:8080/decision-central/git/EventPlanning/'$dir $AD364_HOME/rhdm-working-copy/$dir;
-    cp -Rv $AD364_HOME/AD364-apps/event-planner/Projects/$dir $AD364_HOME/rhdm-working-copy/;
-    cd $AD364_HOME/rhdm-working-copy/$dir;
+6. For each project: clone the DM project down to the working copy, add the files from AD364-apps to the working copy, commit, and push back to DM
+```bash
+for p in DataObjects Dining Listeners OpenBar GoodieBags;
+    do git clone 'http://dmAdmin:redhatdm1!@localhost:8080/decision-central/git/EventPlanning/'$p $AD364_HOME/rhdm-working-copy/$p;
+    cp -Rv $AD364_HOME/AD364-apps/event-planner/$p $AD364_HOME/rhdm-working-copy/;
+    cd $AD364_HOME/rhdm-working-copy/$p;
     git add -A;
     git commit -m 'Adding Files';
     git push;
@@ -87,37 +84,43 @@ done
 DataObjects and Listeners do not deploy to containers for the REST API. They are only used as dependencies in the other 3 projects and so only need to be built and installed to the repository. The other three will need to be deployed
 1. Open your favorite web browser and log into [Decision Central](http://localhost:8080/decision-central/)
 2. Navigate to the EventPlanning namespace and open the DataObjects namespace
-3. expand the dropdown next to the 'Build' button and click 'Build and Install'
+3. Expand the dropdown next to the 'Build' button and click 'Build and Install'
 4. Navigate to the Listeners project and again run 'Build and Install'
 5. Navigate to the Dining project and click the 'Deploy' button to build, install, and deploy Dining to a new container
 6. Navigate to the GoodieBags and OpenBar projects and click 'Deploy' on both
 
 ## Testing projects with REST API
 ### Required tools
-Install [jq](https://stedolan.github.io/jq/) so that the testing script can parse the request and response payloads
+If you do not already have it, install [jq](https://stedolan.github.io/jq/) so that the testing script can parse the request and response payloads
 `sudo yum install jq -y`
 ### Test script and request payloads
 1. In the terminal navigate to the $AD364_HOME/AD364-apps/event-planner/Requests directory
 `cd $AD364_HOME/AD364-apps/event-planner/Requests`
-2. set test.sh to executable
-`chmod +x test.sh`
+2. set test.sh and dmnTest.sh to executable
+`chmod +x test.sh dmnTest.sh`
 3. Test the rules in the set-meals ruleflow-group
 `./test.sh set-meals.json`
 4. Test the rules in the seat-guests ruleflow-group
 `./test.sh seat-guests.json`
-4. Test the query in the Dining project
+5. Test the query in the Dining project
 `./test.sh query.json`
-5. Test the event-planner.plan-event process
+6. Test the event-planner.plan-event process
 `./test.sh small-request.json`
 `./test.sh large-request.json`
-6. Test the rules in the OpenBar project
+7. Test the rules in the OpenBar project
 `./test.sh bar.json`
-6. Test the DMN in the GoodieBags project
-`./testDmn.sh goodieBag.json`
+8. Test the DMN in the GoodieBags project
+`./dmnTest.sh goodieBag.json`
+9. If you get the error
+>Can not set java.util.Map field org.kie.server.api.model.dmn.DMNContextKS.dmnContext to com.eventplanning.dataobjects.Guest
+
+set this system property and restart the server
+`$JBOSS_HOME/bin/jboss-cli.sh --connect '/system-property=org.drools.server.filter.classes:add(value=true)'`  
 
 ## Cleanup
 1. In the terminal window where the server is running. Press Ctrl-C to shutdown the server
 2. Remove the $AD364_HOME directory
 `rm -rf $AD364_HOME`
+`rm -rf ~/.m2/repository/com/eventplanning`
 `sed -i "/^export JBOSS_HOME=/d" ~/.bashrc`
 `sed -i "/^export AD364_HOME=/d" ~/.bashrc`
