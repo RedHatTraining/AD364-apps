@@ -120,6 +120,10 @@ If you do not already have it, install [jq](https://stedolan.github.io/jq/) so t
 
 set this system property and restart the server
 <br/>`$JBOSS_HOME/bin/jboss-cli.sh --connect '/system-property=org.drools.server.filter.classes:add(value=true)'`  
+10. Install and start the weabapp project to test the rules in the OpenBar project
+<br/>`cd $AD364_HOME/AD364-apps/webapp`
+<br/>`npm install && npm start`
+<br/>11. In a web browser navigate to http://localhost:3000 and open the Event Planning tab. Submit bar requests until a guest has had more than 200ml within 30 minutes to see the requests denied
 
 ## Cleanup
 1. In the terminal window where the server is running. Press Ctrl-C to shutdown the server
