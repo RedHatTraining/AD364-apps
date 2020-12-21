@@ -13,6 +13,8 @@ public class BarRequest implements java.io.Serializable {
 	private java.util.Date requestTime;
 	private java.lang.String guestName;
 
+	private java.lang.String status;
+
 	public BarRequest() {
 	}
 
@@ -48,12 +50,22 @@ public class BarRequest implements java.io.Serializable {
 		this.guestName = guestName;
 	}
 
+	public java.lang.String getStatus() {
+		return this.status;
+	}
+
+	public void setStatus(java.lang.String status) {
+		this.status = status;
+	}
+
 	public BarRequest(java.lang.String drinkName, java.lang.Long totalAlcohol,
-			java.util.Date requestTime, java.lang.String guestName) {
+			java.util.Date requestTime, java.lang.String guestName,
+			java.lang.String status) {
 		this.drinkName = drinkName;
 		this.totalAlcohol = totalAlcohol;
 		this.requestTime = requestTime;
 		this.guestName = guestName;
+		this.status = status;
 	}
 
 }

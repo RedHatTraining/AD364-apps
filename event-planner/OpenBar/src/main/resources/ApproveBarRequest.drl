@@ -1,0 +1,25 @@
+package com.eventplanning.openbar;
+
+import java.lang.Number;
+import com.eventplanning.dataobjects.BarRequest;
+
+rule "ApproveBarRequest"
+	dialect "mvel"
+	agenda-group "open-bar"
+	when
+		$currentRequest : BarRequest( status == "requested" , $guestName : guestName != null , $requestedAlc : totalAlcohol, $currentTime : requestTime)
+		Number( $previousAlc : intValue() ) from accumulate ( 
+		BarRequest( guestName == $guestName
+		          , status == "approved"
+		          , $prevAlc : totalAlcohol
+		          , this meets [30m] $currentRequest
+		          , this before $currentRequest
+		          )
+		, sum($prevAlc)) 
+		eval( $requestedAlc + $previousAlc < 200 )
+	then
+		modify( $currentRequest ) {
+				setStatus( "approved" )
+		}
+		System.out.println("Approving request for " + $guestName);
+end

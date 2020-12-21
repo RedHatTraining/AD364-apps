@@ -1,0 +1,15 @@
+package com.eventplanning.openbar;
+
+import java.lang.Number;
+import com.eventplanning.dataobjects.BarRequest;
+
+rule "RemoveOldRequests"
+	dialect "mvel"
+	when
+		not (BarRequest( status == "requested" )) 
+		BarRequest( $lastTime : requestTime)
+		$olderRequest : BarRequest( requestTime before $lastTime )
+	then
+		retract( $olderRequest );
+		System.out.println("Removing request for " + $olderRequest.getGuestName() + " at " + $olderRequest.getRequestTime());
+end

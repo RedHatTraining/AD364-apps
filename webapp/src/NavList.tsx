@@ -20,6 +20,9 @@ class NavDefaultList extends React.Component {
                     <NavItem id="last-minute" isActive={window.location.pathname.endsWith("/last-minute")}>
                         <Link to="/last-minute">Last Minute Pricing</Link>
                     </NavItem>
+                    <NavItem id="event-planning" isActive={window.location.pathname.endsWith("/event-planning")}>
+                        <Link to="/event-planning">Event Planning</Link>
+                    </NavItem>
                 </NavList>
             </Nav>
         );

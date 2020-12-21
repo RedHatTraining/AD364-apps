@@ -3849,6 +3849,11 @@
     "whatwg-mimetype" "^2.2.0"
     "whatwg-url" "^7.0.0"
 
+"dateformat@^4.3.1":
+  "integrity" "sha512-xhq1wI5BQ0TMJDvio0BLP8lNeYlhAvmh/7H52H9n6kfzqSmRpIhH5KEIjJ7onFEAh5CQVrAP2MAG8wZ6j0BKzQ=="
+  "resolved" "https://registry.npmjs.org/dateformat/-/dateformat-4.3.1.tgz"
+  "version" "4.3.1"
+
 "debug@^2.2.0":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="
   "resolved" "https://registry.npmjs.org/debug/-/debug-2.6.9.tgz"
