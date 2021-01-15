@@ -34,3 +34,19 @@
     animation-name: popupFadeIn;
     animation-duration: .3s;
 }
+
+.border-top-blue {
+    border-top: 2px solid var(--pf-global--palette--blue-300);
+}
+
+.border-top-red {
+    border-top: 2px solid var(--pf-global--palette--red-100);
+}
+
+.border-top-yellow {
+    border-top: 2px solid var(--pf-global--warning-color--100);
+}
+
+.align-icons p svg{
+    vertical-align: middle !important;
+}

@@ -24,6 +24,7 @@ export abstract class RestService {
             const r = await this.axiosInstance.get<T>(url, { timeout: this.timeoutMs });
             return r.data;
         } catch (e) {
+            console.error(e);
             throw new RESTConnectionError(e, this.remoteServiceName, e.response?.status);
         }
     }
@@ -33,6 +34,7 @@ export abstract class RestService {
             const r = await this.axiosInstance.post<R>(url, body, { timeout: this.timeoutMs });
             return r.data;
         } catch (e) {
+            console.error(e);
             throw new RESTConnectionError(e, this.remoteServiceName, e.response?.status);
         }
     }
