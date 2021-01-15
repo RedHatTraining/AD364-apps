@@ -16,8 +16,6 @@ import {
 } from "@patternfly/react-core";
 
 import KieDMNService from "./Services/KieDMNService";
-import ErrorCircleOIcon from "@patternfly/react-icons/dist/js/icons/error-circle-o-icon";
-import OkIcon from "@patternfly/react-icons/dist/js/icons/ok-icon";
 
 interface FraudDetectionState {
     lastMinute: boolean;
@@ -262,20 +260,12 @@ class FraudDetection extends Component<any, FraudDetectionState> {
                             <CardBody>
                                 <TextContent className="align-icons">
                                     <p>
-                                        Allow transaction:{" "}
-                                        {fraudAction.permitTransaction ? (
-                                            <OkIcon size="md" color="var(--pf-global--success-color--200)" />
-                                        ) : (
-                                            <ErrorCircleOIcon size="md" color="var(--pf-global--danger-color--100)" />
-                                        )}
+                                        Allow transaction:
+                                        {fraudAction.permitTransaction ? "true" : "false"}
                                     </p>
                                     <p>
-                                        Freeze account:{" "}
-                                        {fraudAction.freezeAccount ? (
-                                            <OkIcon size="md" color="var(--pf-global--danger-color--100)" />
-                                        ) : (
-                                            <ErrorCircleOIcon size="md" color="var(--pf-global--success-color--200)" />
-                                        )}
+                                        Freeze account:
+                                        {fraudAction.freezeAccount ? "true" : "false"}
                                     </p>
                                     <p>Fraud score: {fraudAction.score}</p>
                                 </TextContent>
