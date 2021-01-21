@@ -7,6 +7,7 @@ import LastMinute from "./LastMinute";
 import FraudDetection from "./FraudDetection";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import PricingTest from "./PricingTest";
 
 const App = () => {
     return (
@@ -27,6 +28,9 @@ const App = () => {
                     </Route>
                     <Route path="/fraud-detection" exact>
                         <FraudDetection />
+                    </Route>
+                    <Route path="/pricing-test" exact>
+                        <PricingTest />
                     </Route>
                 </Structure>
             </Switch>

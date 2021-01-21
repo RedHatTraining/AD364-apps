@@ -23,6 +23,9 @@ class NavDefaultList extends React.Component {
                     <NavItem id="fraud-detection" isActive={window.location.pathname.endsWith("/fraud-detection")}>
                         <Link to="/fraud-detection">Fraud Detection</Link>
                     </NavItem>
+                    <NavItem id="pricing-page" isActive={window.location.pathname.endsWith("/pricing-test")}>
+                        <Link to="/pricing-test">Pricing Performance Test</Link>
+                    </NavItem>
                 </NavList>
             </Nav>
         );
